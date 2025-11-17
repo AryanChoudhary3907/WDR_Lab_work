@@ -25,6 +25,7 @@ function Studentregistration({ onSubmit }) {
 
     onSubmit(user);
 
+     alert( user.name +" Student added successfully!");
     // Reset form after submission
     setUser({
       id: "",
