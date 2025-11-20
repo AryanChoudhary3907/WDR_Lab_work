@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 220px;
+            margin: 100px auto;
+            padding: 40px;
+            border: 1px solid lightgray;
+            /* border-radius: 10px; */
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-top: 1px solid white;
+            border-left: white;
+            border-right: white;
+            /* border-radius: 5px; */
+        }
+        button {
+            padding: 10px;
+            border: none;
+            /* border-radius: 5px; */
+            background-color:  rgb(67, 34, 232);
+            color: white;
+            cursor: pointer;
+            margin-bottom: -25px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        button:hover {
+            /* background-color: rgb(50, 6, 228); */
+            cursor: pointer;
+            color: black;
+        }
+        p {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bolder;
+            margin-top: -25px;
+            margin-bottom: 20px;
+            color: rgb(67, 34, 232);
+            margin-left: -12px;
+        }
+        :placeholder-shown {
+            font-size: 15px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="index.html" method="get">
+        <p style="text-align: center;">Login</p>
+        <input placeholder="User name or id" type="text" id="userId" name="userId" required><br>
+        <input placeholder="Password" type="password" id="password" name="password" required><br>
+        <!-- <input placeholder="DOB" type="date" id="dob" name="dob" required><br> -->
+         <input type="text" placeholder="Date of Birth" onfocus="(this.type='date')" id="dob" name="dob" required><br>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
