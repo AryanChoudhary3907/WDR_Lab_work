@@ -1,0 +1,13 @@
+.second {
+    border-style: dotted;
+    border-color: green;
+    margin: 60px;
+    padding: 10px;
+    height: 10%;
+}
+
+html, body {
+    height: 100%;
+    /* margin: 0%;
+    padding: 0%; */
+}

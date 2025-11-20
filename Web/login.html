@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            margin:40px ;
+            background-color: antiquewhite;
+            font-size: large;
+        }
+        form{
+            border: 1px solid lightgray;
+            display: inline-block;
+            padding: 20px;
+            background-color: whitesmoke;
+            box-shadow: 5px 5px 10px gray;
+        }
+        button{
+            margin:10px;
+            border: lightgray 1px solid;
+        }
+        button:hover{
+            background-color: white;
+            cursor: pointer;
+        }
+        label{
+            font-weight: bold;
+            text-align: left;
+        }
+        label,input{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+   
+    <form action="index.html" method="get">
+        
+       
+        <input placeholder="Username" type="text" id="userId" name="userId" required><br>
+    
+        <input placeholder="Password" type="password" id="password" name="password" required><br>
+
+        <input placeholder="DOB" type="date" id="dob" name="dob" required><br>
+
+        <button style="background-color: aqua;" type="submit">Login</button>
+    </form>
+</body>
+</html>
