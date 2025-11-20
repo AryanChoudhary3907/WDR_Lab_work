@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function CourseNavigationBar({ setActive }) {
+export default function CourseNavigationBar() {
   return (
     <div style={{ marginBottom: "20px" }}>
-      <button onClick={() => setActive("register")}>Course Registration</button>
-      <button onClick={() => setActive("list")}>Course List</button>
-      <button onClick={() => setActive("update")}>Update Course</button>
-      <button onClick={() => setActive("delete")}>Delete Course</button>
+      <Link to="/course/register"><button>Course Registration</button></Link>
+      <Link to="/course/list"><button>Course List</button></Link>
+      <Link to="/course/update"><button>Update Course</button></Link>
+      <Link to="/course/delete"><button>Delete Course</button></Link>
     </div>
   );
 }

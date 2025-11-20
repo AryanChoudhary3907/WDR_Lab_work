@@ -1,51 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function FacultyNavigationBar({ onNavigate, currentPage }) {
-  const navStyle = {
-    padding: "10px 20px",
-    cursor: "pointer",
-    marginRight: "10px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    background: "#f2f2f2",
-  };
-
-  const activeStyle = {
-    ...navStyle,
-    background: "#d1e0ff",
-    border: "1px solid #4a78ff",
-    fontWeight: "bold",
-  };
-
+export default function FacultyNavigationBar() {
   return (
     <div style={{ marginBottom: "20px" }}>
-      <button
-        style={currentPage === "register" ? activeStyle : navStyle}
-        onClick={() => onNavigate("register")}
-      >
-        Register Faculty
-      </button>
-
-      <button
-        style={currentPage === "list" ? activeStyle : navStyle}
-        onClick={() => onNavigate("list")}
-      >
-        Faculty List
-      </button>
-
-      <button
-        style={currentPage === "profile" ? activeStyle : navStyle}
-        onClick={() => onNavigate("profile")}
-      >
-        Faculty Profile
-      </button>
-
-      <button
-        style={currentPage === "update" ? activeStyle : navStyle}
-        onClick={() => onNavigate("update")}
-      >
-        Update Faculty
-      </button>
+      <Link to="/faculty/register"><button>Register Faculty</button></Link>
+      <Link to="/faculty/list"><button>Faculty List</button></Link>
+      <Link to="/faculty/profile"><button>Faculty Profile</button></Link>
+      <Link to="/faculty/update"><button>Update Faculty</button></Link>
+      <Link to="/faculty/delete"><button>Delete Faculty</button></Link>
     </div>
   );
 }

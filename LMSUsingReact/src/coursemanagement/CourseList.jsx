@@ -1,15 +1,18 @@
 import React from "react";
+import { useAppContext } from "../context/AppContext";
 
-export default function CourseList({ courses }) {
+export default function CourseList() {
+  const { courseList } = useAppContext();
+
   return (
     <div>
       <h2>Registered Courses</h2>
 
-      {courses.length === 0 ? (
+      {courseList.length === 0 ? (
         <p>No courses registered.</p>
       ) : (
         <ul>
-          {courses.map((c) => (
+          {courseList.map((c) => (
             <li key={c.id}>
               <strong>{c.id}. </strong><strong>{c.name}</strong> — {c.description} ({c.duration})
             </li>

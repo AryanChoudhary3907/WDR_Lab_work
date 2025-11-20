@@ -1,47 +1,31 @@
 import React, { useState } from "react";
+import { useAppContext } from "../context/AppContext";
 
-export default function FacultyProfile({ facultyList }) {
+export default function FacultyProfile() {
+  const { facultyList } = useAppContext();
   const [selectedId, setSelectedId] = useState("");
-  const selectedFaculty = facultyList.find((f) => f.id === selectedId);
+
+  const faculty = facultyList.find((f) => f.id === selectedId);
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "16px",
-        borderRadius: "8px",
-        width: "350px",
-        background: "#f9f9f9",
-      }}
-    >
+    <div>
       <h2>Faculty Profile</h2>
 
-      {/* Select faculty ID */}
-      <label>Select Faculty ID:</label>
-      <select
-        value={selectedId}
-        onChange={(e) => setSelectedId(e.target.value)}
-        style={{ width: "100%", padding: "6px", marginBottom: "15px" }}
-      >
-        <option value="">-- Select ID --</option>
+      <select value={selectedId} onChange={(e) => setSelectedId(e.target.value)}>
+        <option value="">-- Select Faculty --</option>
         {facultyList.map((f) => (
           <option key={f.id} value={f.id}>
-            {f.id} — {f.name}
+            {f.id} - {f.name}
           </option>
         ))}
       </select>
 
-      {/* Show Profile */}
-      {!selectedFaculty ? (
-        <p>No faculty selected.</p>
-      ) : (
-        <div>
-          <p><strong>ID:</strong> {selectedFaculty.id}</p>
-          <p><strong>Name:</strong> {selectedFaculty.name}</p>
-          <p><strong>Age:</strong> {selectedFaculty.age}</p>
-          <p><strong>Qualification:</strong> {selectedFaculty.qualification}</p>
-          <p><strong>Joined At:</strong> {selectedFaculty.joinedAt}</p>
-          <p><strong>Status:</strong> {selectedFaculty.status}</p>
+      {faculty && (
+        <div style={{ marginTop: "15px" }}>
+          <p><b>Name:</b> {faculty.name}</p>
+          <p><b>Age:</b> {faculty.age}</p>
+          <p><b>Qualification:</b> {faculty.qualification}</p>
+          <p><b>Status:</b> {faculty.status}</p>
         </div>
       )}
     </div>

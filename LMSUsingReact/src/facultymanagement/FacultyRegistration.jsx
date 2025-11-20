@@ -1,16 +1,15 @@
-// Component for course registration form
-
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useAppContext } from "../context/AppContext";
 
-export default function FacultyRegistration({ onRegisterFaculty }) {
+export default function FacultyRegistration() {
+  const { addFaculty } = useAppContext();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    
-    onRegisterFaculty(data); // send data to App.jsx
-    alert("Registraion Successful!")
-    reset(); // clear form
+    addFaculty(data);
+    alert("Registration Successful!");
+    reset();
   };
 
   return (
@@ -18,28 +17,27 @@ export default function FacultyRegistration({ onRegisterFaculty }) {
       <h2>Faculty Registration</h2>
 
       <label>Id:</label>
-      <input type="text" {...register("id")} required />
-      <br /> <br />
+      <input {...register("id")} required />
+
       <label>Name:</label>
-      <input type="text" {...register("name")} required />
-<br /> <br />
+      <input {...register("name")} required />
+
       <label>Age:</label>
       <input type="number" {...register("age")} required />
-<br /> <br />
+
       <label>Qualification:</label>
-      <input type="text" {...register("qualification")} required />
-<br /> <br />
+      <input {...register("qualification")} required />
+
       <label>Joined At:</label>
       <input type="date" {...register("joinedAt")} required />
-<br /> <br />
-      <label>Select Faculty Status:</label>
+
+      <label>Status:</label>
       <select {...register("status")} required>
-        <option value="">--select--</option>
         <option value="active">Active</option>
         <option value="left">Left</option>
       </select>
-<br /> <br />
-      <button type="submit">Register Faculty</button>
+
+      <button type="submit">Register</button>
     </form>
   );
 }

@@ -1,117 +1,48 @@
-// import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// import CourseNavigationBar from "./coursemanagement/CourseNavigationBar";
-// import CourseRegistration from "./coursemanagement/CourseRegistration";
-// import CourseList from "./coursemanagement/CourseList";
-// import CourseUpdate from "./coursemanagement/CourseUpdate";
-// import CourseDelete from "./coursemanagement/CourseDelete";
-// import FacultyRegistration from "./facultymanagement/FacultyRegistration";
+import { AppProvider } from "./context/AppContext";
 
-// export default function App() {
-//   const [active, setActive] = useState("register");
-
-//   const [courses, setCourses] = useState([]);
-
-//   // Register new course
-//   const handleRegisterCourse = (course) => {
-//     setCourses([...courses, course]);
-//   };
-
-//   // Update existing course
-//   const handleUpdateCourse = (updated) => {
-//     setCourses(courses.map((c) => (c.id === updated.id ? updated : c)));
-//   };
-
-//   // Delete course
-//   const handleDelete = (id) => {
-//     setCourses(courses.filter((c) => c.id !== id));
-//   };
-
-//   return (
-//     <div style={{ padding: "20px" }}>
-//       <CourseNavigationBar setActive={setActive} />
-
-//       {active === "register" && (
-//         <CourseRegistration onRegisterCourse={handleRegisterCourse} />
-//       )}
-
-//       {active === "list" && <CourseList courses={courses} />}
-
-//       {active === "update" && (
-//         <CourseUpdate courses={courses} onUpdate={handleUpdateCourse} />
-//       )}
-
-//       {active === "delete" && (
-//         <CourseDelete courses={courses} onDelete={handleDelete} />
-//       )}
-//     </div>
-//   );  
-// }
-
-
-import React, { useState } from "react";
+// Faculty components
 import FacultyNavigationBar from "./facultymanagement/FacultyNavigationBar";
 import FacultyRegistration from "./facultymanagement/FacultyRegistration";
 import FacultyList from "./facultymanagement/FacultyList";
 import FacultyProfile from "./facultymanagement/FacultyProfile";
 import FacultyUpdate from "./facultymanagement/FacultyUpdate";
+import FacultyDelete from "./facultymanagement/FacultyDelete";
+
+// Course components
+import CourseNavigationBar from "./coursemanagement/CourseNavigationBar";
+import CourseRegistration from "./coursemanagement/CourseRegistration";
+import CourseList from "./coursemanagement/CourseList";
+import CourseUpdate from "./coursemanagement/CourseUpdate";
+import CourseDelete from "./coursemanagement/CourseDelete";
 
 export default function App() {
-  const [facultyList, setFacultyList] = useState([]);
-  const [selectedFaculty, setSelectedFaculty] = useState(null);
-  const [page, setPage] = useState("register"); // default page
-
-  // Add new faculty
-  const handleRegisterFaculty = (facultyData) => {
-    setFacultyList((prev) => [...prev, facultyData]);
-  };
-
-  // Update existing faculty
-  const handleUpdateFaculty = (updatedFaculty) => {
-    setFacultyList((prev) =>
-      prev.map((f) => (f.id === updatedFaculty.id ? updatedFaculty : f))
-    );
-    setSelectedFaculty(updatedFaculty);
-  };
-
-  // Select faculty from list
-  const handleSelectFaculty = (faculty) => {
-    setSelectedFaculty(faculty);
-    setPage("profile");
-  };
-
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Faculty Management System</h1>
+    <AppProvider>
+      <Router>
+        <h1 style={{ textAlign: "center" }}>LMS </h1>
 
-      {/* Navigation Bar */}
-      <FacultyNavigationBar
-        onNavigate={setPage}
-        currentPage={page}
-      />
+        {/* Navbars */}
+        <FacultyNavigationBar />
+        <CourseNavigationBar />
 
-      {/* Page Routing */}
-      {page === "register" && (
-        <FacultyRegistration onRegisterFaculty={handleRegisterFaculty} />
-      )}
+        <Routes>
+          {/* Faculty Routes */}
+          <Route path="/faculty/register" element={<FacultyRegistration />} />
+          <Route path="/faculty/list" element={<FacultyList />} />
+          <Route path="/faculty/profile" element={<FacultyProfile />} />
+          <Route path="/faculty/update" element={<FacultyUpdate />} />
+          <Route path="/faculty/delete" element={<FacultyDelete />} />
 
-      {page === "list" && (
-        <FacultyList
-          facultyList={facultyList}
-          onSelectFaculty={handleSelectFaculty}
-        />
-      )}
-
-      {page === "profile" && <FacultyProfile facultyList={facultyList} />}
-
-     {page === "update" && (
-  <FacultyUpdate
-    facultyList={facultyList}
-    onUpdateFaculty={handleUpdateFaculty}
-  />
-)}
-
-    </div>
+          {/* Course Routes */}
+          <Route path="/course/register" element={<CourseRegistration />} />
+          <Route path="/course/list" element={<CourseList />} />
+          <Route path="/course/update" element={<CourseUpdate />} />
+          <Route path="/course/delete" element={<CourseDelete />} />
+        </Routes>
+      </Router>
+    </AppProvider>
   );
 }
-
