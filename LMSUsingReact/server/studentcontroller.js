@@ -1,51 +1,72 @@
-import pool from './db.js'
+import pool from './db.js';
 
-//to create a function to fetch data from mysql table
-export async function fetchStudentsList(req,res)
-{
-    // to fetch
-	try
-	{
-		//fetching data from MySQL table
-		const [result] = await pool.query("select * from student");
-		//setting this data inot response in json
+// ----------------------- Fetch Students -----------------------
+export async function fetchStudentsList(req, res) {
+	try {
+		const [result] = await pool.query("SELECT * FROM students");
 		res.json(result);
-	}
-	catch(err)
-	{
-		console.log("Unable to fetch data ",err);
-	}
-
-}
-
-//to create a function to delete data from table by id
-export async function deleteStudent(req,res) {
-    
-    //to delete
-    try
-	{
-		await pool.query("DELETE FROM student WHERE id ="+req);
-		res.json("Deletion Successfull");
-	}
-	catch(err)
-	{
-		console.log("Unable to delete data ",err);
+	} catch (err) {
+		console.log("Unable to fetch data", err);
+		res.status(500).json({ error: "Fetching failed" });
 	}
 }
 
-//to create a function to insert data in table
-export async function createStudent(req , res) {
-       
-     //to create
-    try
-	{
-		const [result] = await pool.query("INSERT INTO student (id, name, standard, age, rollno) VALUES ;");
-		//setting this data into response in json
-		res.json(result);
-	}
-	catch(err)
-	{
-		console.log("Unable to insert data ",err);
+// ----------------------- Delete Student -----------------------
+export async function deleteStudent(req, res) {
+	try {
+		const id = req.params.id;
+
+		const [result] = await pool.query(
+			"DELETE FROM students WHERE id = ?",
+			[id]
+		);
+
+		if (result.affectedRows === 0) {
+			return res.status(404).json({ message: "Student not found" });
+		}
+
+		res.json({ message: "Deletion Successful" });
+	} catch (err) {
+		console.log("Unable to delete data", err);
+		res.status(500).json({ error: "Deletion failed" });
 	}
 }
 
+// ----------------------- Insert Student -----------------------
+export async function createStudent(req, res) {
+	try {
+		const { id, name, standard, age, rollno } = req.body;
+
+		const [result] = await pool.query(
+			"INSERT INTO students (id, name, standard, age, rollno) VALUES (?, ?, ?, ?, ?)",
+			[id, name, standard, age, rollno]
+		);
+
+		res.json({ message: "Insertion Successful", data: result });
+	} catch (err) {
+		console.log("Unable to insert data", err);
+		res.status(500).json({ error: "Insertion failed" });
+	}
+}
+
+// ----------------------- Update Student -----------------------
+export async function updateStudent(req, res) {
+	try {
+		const id = req.params.id;
+		const { name, standard, age, rollno } = req.body;
+
+		const [result] = await pool.query(
+			"UPDATE students SET name = ?, standard = ?, age = ?, rollno = ? WHERE id = ?",
+			[name, standard, age, rollno, id]
+		);
+
+		if (result.affectedRows === 0) {
+			return res.status(404).json({ message: "Student not found" });
+		}
+
+		res.json({ message: "Updation Successful" });
+	} catch (err) {
+		console.log("Unable to update data", err);
+		res.status(500).json({ error: "Updation failed" });
+	}
+}
