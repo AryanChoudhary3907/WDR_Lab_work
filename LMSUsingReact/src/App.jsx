@@ -17,6 +17,7 @@ import CourseRegistration from "./coursemanagement/CourseRegistration";
 import CourseList from "./coursemanagement/CourseList";
 import CourseUpdate from "./coursemanagement/CourseUpdate";
 import CourseDelete from "./coursemanagement/CourseDelete";
+import Studentregistration from "./studentmanagement/src/Component/Studentregistration";
 
 export default function App() {
   return (
@@ -41,6 +42,12 @@ export default function App() {
           <Route path="/course/list" element={<CourseList />} />
           <Route path="/course/update" element={<CourseUpdate />} />
           <Route path="/course/delete" element={<CourseDelete />} />
+
+            {/* Student Routes */}
+          <Route path="/student/register" element={<Studentregistration />} />
+          <Route path="/student/list" element={<StudentList />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
+
         </Routes>
       </Router>
     </AppProvider>
